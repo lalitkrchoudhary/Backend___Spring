@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,12 +19,21 @@ import in.lalit.exception.UserNotFoundException;
 import in.lalit.repository.StudentRepository;
 
 @RestController
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin(origins = "${frontend.url}")
 public class StudentController {
 	// get all the students
 	@Autowired
 	StudentRepository repo;
-	
+
+	//export SPRING_APPLICATION_NAME=
+	//export SPRING_DATASOURCE_URL=
+//	export DATASOURCE_URL=jdbc:mysql://localhost:3306/apple
+//	export DATASOURCE_USER=root
+//	export DATASOURCE_PASSWORD=lalit
+//	export FRONTEND_URL=http://localhost:3000
+
+//	@Value("${frontend.url}")
+//
 	@GetMapping("/students")
 	public  List<Student> getAllStudents(){
 		List<Student> students = repo.findAll();
